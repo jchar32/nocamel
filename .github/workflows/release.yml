@@ -1,9 +1,18 @@
-name: Publish to TestPyPI
+name: Publish Package
 
 on:
   release:
     types: [created]
-  workflow_dispatch:  # Allow manual triggering
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Publish target'
+        required: true
+        default: 'testpypi'
+        type: choice
+        options:
+          - testpypi
+          - pypi
 
 jobs:
   deploy:
@@ -27,11 +36,24 @@ jobs:
         ls -la dist/
         # Optional validation of the generated files
         uv pip install dist/*.whl --dry-run
-    - name: Publish package to TestPyPI
+        
+    # Publish to TestPyPI for pre-releases or manual selection
+    - name: Publish to TestPyPI
+      if: github.event.inputs.environment == 'testpypi' || (github.event_name == 'release' && github.event.release.prerelease)
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         user: __token__
         password: ${{ secrets.TEST_PYPI_API_TOKEN }}
         repository-url: https://test.pypi.org/legacy/
+        skip-existing: true
+        verbose: true
+        
+    # Publish to PyPI for full releases or manual selection
+    - name: Publish to PyPI
+      if: github.event.inputs.environment == 'pypi' || (github.event_name == 'release' && !github.event.release.prerelease)
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_API_TOKEN }}
         skip-existing: true
         verbose: true
