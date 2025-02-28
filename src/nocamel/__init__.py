@@ -26,7 +26,7 @@ def main(snake: bool | None, lower: bool | None, sentence: bool | None, kebab: b
     elif sentence:
         result = converters.to_sentence(input)
     elif kebab:
-        result = converters.to_kebab
+        result = converters.to_kebab(input)
     print(result)
     try:
         pyperclip.copy(result)  # Copy to clipboard
