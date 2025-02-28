@@ -43,3 +43,8 @@ exclude = [
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/nocamel"]
+
+[[tool.uv.index]]
+name = "testpypi"
+url = "https://test.pypi.org/nocamel/"
+publish-url = "https://test.pypi.org/nocamel/"
