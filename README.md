@@ -58,7 +58,7 @@ helloworldexample
 
 Convert to kebab-case:
 ```bash
-$ nocamel "HelloWorldExample" --kebab
+$ nocamel "Hello World Example" --kebab
 hello-world-example
 ```
 
@@ -83,7 +83,7 @@ from nocamel import converters
 result = converters.to_snake("helloWorldExample")
 print(result)  # Output: hello_world_example
 
-result_kebab = converters.to_kebob("HelloWorldExample")
+result_kebab = converters.to_kebob("Hello World Example")
 print(result_kebab)  # Output: hello-world-example
 ```
 

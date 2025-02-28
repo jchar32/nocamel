@@ -38,3 +38,15 @@ def test_to_lower_with_numbers_and_symbols():
 def test_to_sentence_with_numbers_and_symbols():
     assert converters.to_sentence("HELLO123!@#") == "Hello123!@#"
     assert converters.to_sentence("HELLO 123 !@#") == "Hello 123 !@#"
+
+
+def test_to_kebab():
+    assert converters.to_kebab("Hello World") == "hello-world"
+    assert converters.to_kebab("Camel Case Example") == "camel-case-example"
+    assert converters.to_kebab("PascalCase") == "pascalcase"
+    assert converters.to_kebab("camelCase") == "camelcase"
+
+
+def test_to_kebab_with_numbers_and_symbols():
+    assert converters.to_kebab("Hello 123!@#") == "hello-123!@#"
+    assert converters.to_kebab("HELLO 123 !@#") == "hello-123-!@#"
