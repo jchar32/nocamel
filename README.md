@@ -46,6 +46,7 @@ Convert from camel or pascal case to...
 - `-snake`: to snake case "like_this"
 - `--sentence (default)`: to sentence case and inject spaces "Like this"
 - `--lower`: to all lower case "like this" or "likethis"
+- -`--kebab`: to kebab case "like-this"
 - `-h, --help`: Show the help message
 
 ### Examples
